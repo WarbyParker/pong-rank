@@ -11,36 +11,30 @@
 
       <div class="row">
 
-        <div class="span4">
+        <div class="col-md-4">
           <h2>Winner</h2>
-
-          Player: 
+          <h3>Player:</h3>
           <select name="W">
             {% for competitor in competitors %}
               <option value="{{ competitor.userid }}">{{ competitor.nickname }}</option>
             {% endfor %}
           </select>
-
-          Score: <input type="text" name="winner_score">
-
+          <h4>Score:</h4><input type="text" name="winner_score">
         </div>
         
-        <div class="span3" style="padding:2em 0;font-weight:bold; font-size:150%;">
+        <div class="col-md-3" style="padding:2em 0;font-weight:bold; font-size:150%;">
           defeated
         </div>
         
-        <div class="span4">
+        <div class="col-md-4">
           <h2>Loser</h2>
-
-          Player:
+          <h3>Player:</h3>
           <select name="L">
             {% for competitor in competitors %}
               <option value="{{ competitor.userid }}">{{ competitor.nickname }}</option>
             {% endfor %}
           </select>
-
-          Score: <input type="text" name="loser_score">
-
+          <h4>Score:</h4><input type="text" name="loser_score">
         </div>
         
       </div>
