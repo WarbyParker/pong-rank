@@ -14,6 +14,7 @@ class Competitor(db.Model):
   rating = db.FloatProperty(default=BASE_RANK)
   include_in_rankings = db.BooleanProperty(default=True)
   is_scorekeeper = db.BooleanProperty(default=False)
+  total_score = db.IntegerProperty(default=0)
 
   @staticmethod
   def ordered():
@@ -103,6 +104,8 @@ class Result(db.Model):
     
     winner.rating = new_ratings[0]
     loser.rating = new_ratings[1]
+    winner.total_score += winners_score
+    loser.total_score += losers_score
     winner.put()
     loser.put()
 

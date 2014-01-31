@@ -11,6 +11,7 @@
             <th>Rank</th>
             <th>Name</th>
             <th>Rating</th>
+            <th>Total Points</th>
             <th>Results</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
               <td>{{ loop.index }}</td>
               <td>{{ ranking.nickname }}</td>
               <td>{{ ranking.rating }}</td>
+              <td>{{ ranking.total_score }}</td>
               <td><a href="/results?userid={{ ranking.userid }}" class="btn">results</a></td>
             </tr>
           {% endfor %}
