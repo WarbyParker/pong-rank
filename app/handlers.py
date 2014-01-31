@@ -51,29 +51,25 @@ class ResultsHandler(webapp2.RequestHandler):
 class AddResultHandler(webapp2.RequestHandler):
   def get(self):
     user = ActiveUser()
-    if user.is_scorekeeper:
-
-      winner_id = self.request.get("W")
-      loser_id = self.request.get("L")
-      if self.request.get("result_submit") == "submit" and winner_id != loser_id:
-          
-        winner = Competitor.by_id(winner_id)
-        loser = Competitor.by_id(loser_id)
-        Result.process_match_result(winner,loser)
-             
-        self.redirect("/")
-      else:  
-        template_values = {
-            'competitors': Competitor.ordered(),
-            'user': user
-          }
-        template = jinja_environment.get_template('templates/result.html')
-        self.response.out.write(template.render(template_values)) 
-
-    else:
+    
+    winner_id = self.request.get("W")
+    loser_id = self.request.get("L")
+    if self.request.get("result_submit") == "submit" and winner_id != loser_id:
+        
+      winner = Competitor.by_id(winner_id)
+      loser = Competitor.by_id(loser_id)
+      Result.process_match_result(winner,loser)
+           
       self.redirect("/")
+    else:  
+      template_values = {
+          'competitors': Competitor.ordered(),
+          'user': user
+        }
+      template = jinja_environment.get_template('templates/result.html')
+      self.response.out.write(template.render(template_values)) 
 
-
+    
 class CalculatorHandler(webapp2.RequestHandler):
   def get(self):
     user = ActiveUser()
