@@ -36,6 +36,8 @@ class Result(db.Model):
   loser_old_rating = db.FloatProperty()
   winner_new_rating = db.FloatProperty()
   loser_new_rating = db.FloatProperty()
+  winner_score = db.IntegerProperty()
+  loser_score = db.IntegerProperty()
 
   def winner_name(self):
     c = Competitor.by_id(self.winner_user_id)
@@ -77,7 +79,7 @@ class Result(db.Model):
     
 
   @staticmethod
-  def process_match_result(winner, loser):
+  def process_match_result(winner, loser, winners_score, losers_score):
     logging.info("result: %s(%s) defeated %s(%s)" % (winner.nickname, winner.rating, loser.nickname, loser.rating))
         
     new_ratings = EloRating.calculate_elo_rank(winner.rating,loser.rating)
@@ -93,7 +95,9 @@ class Result(db.Model):
         winner_old_rating = winner.rating,
         loser_old_rating = loser.rating,
         winner_new_rating = new_ratings[0],
-        loser_new_rating = new_ratings[1] 
+        loser_new_rating = new_ratings[1], 
+        winner_score = winners_score,
+        loser_score = losers_score
         )
     res.put()
     
@@ -101,6 +105,7 @@ class Result(db.Model):
     loser.rating = new_ratings[1]
     winner.put()
     loser.put()
+
 
 
 #TODO _ penalise for non-play; reward for most play

@@ -54,11 +54,15 @@ class AddResultHandler(webapp2.RequestHandler):
     
     winner_id = self.request.get("W")
     loser_id = self.request.get("L")
+
     if self.request.get("result_submit") == "submit" and winner_id != loser_id:
         
       winner = Competitor.by_id(winner_id)
       loser = Competitor.by_id(loser_id)
-      Result.process_match_result(winner,loser)
+      winner_score = self.request.get("winner_score")
+      loser_score = self.request.get("loser_score")
+      
+      Result.process_match_result(winner,loser,int(winner_score),int(loser_score))
            
       self.redirect("/")
     else:  

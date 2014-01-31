@@ -16,7 +16,9 @@
         <tr>
           <th>Date</th>
           <th>Winner</th>
+          <th>Score</th>
           <th>Loser</th>
+          <th>Score</th>
           <th>Points Transacted</th>
         </tr>
       </thead>
@@ -25,7 +27,9 @@
         <tr>
           <td>{{ result.date_played.strftime("%d/%m/%Y") }}</td>
           <td>{{ result.winner_name() }}</td>
+          <td>{{ result.winner_score }}</td>
           <td>{{ result.loser_name() }}</td>
+          <td>{{ result.loser_score }}</td>
           <td>{{ result.points_transacted() }}</td>
         </tr>
         {% endfor %}
